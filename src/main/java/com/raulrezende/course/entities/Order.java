@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="tb_order") // Para alterar o nome da tabela, sem essa anotação a tabela terá o nome da classe
 public class Order implements Serializable {
@@ -19,6 +21,8 @@ public class Order implements Serializable {
 	@Id // Informamos qual a chave primaria no banco de dados
 	@GeneratedValue(strategy=GenerationType.IDENTITY) // Auto-incremento para a maioria dos banco de dados
 	private Long id;
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="GMT")
 	private Instant moment;
 	
 	@ManyToOne // Anotação da associação Um para Um

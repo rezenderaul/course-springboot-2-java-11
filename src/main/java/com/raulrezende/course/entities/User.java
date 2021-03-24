@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity // Instrui ao JPA como ele irá converter os objetos
 @Table(name="tb_user") // Para alterar o nome da tabela, sem essa anotação a tabela terá o nome da classe
 public class User implements Serializable {
@@ -24,6 +26,7 @@ public class User implements Serializable {
 	private String phone;
 	private String password;
 	
+	@JsonIgnore // Evita uma associação de mão dupla (loop infinito)
 	@OneToMany(mappedBy="client") // Nome do atributo do outro lado da associação ("client")
 	private List<Order> orders = new ArrayList<>(); // Associação Um cliente para Muitos pedidos
 	
